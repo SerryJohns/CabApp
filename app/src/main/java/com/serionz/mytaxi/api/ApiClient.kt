@@ -10,9 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.Type
 import java.util.concurrent.TimeUnit
 
-/**
- * Created by johns on 25/01/2019.
- */
 
 class ApiClient {
     private var retrofitApi: Retrofit? = null

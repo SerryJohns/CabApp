@@ -7,9 +7,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-/**
- * Created by johns on 26/01/2019.
- */
 
 interface GeocodeService {
 

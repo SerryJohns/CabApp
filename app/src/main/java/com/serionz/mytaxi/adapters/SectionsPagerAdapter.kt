@@ -6,9 +6,6 @@ import android.support.v4.app.FragmentPagerAdapter
 import com.serionz.mytaxi.CabMapFragment
 import com.serionz.mytaxi.CabsListFragment
 
-/**
- * Created by johns on 23/01/2019.
- */
 
 class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {

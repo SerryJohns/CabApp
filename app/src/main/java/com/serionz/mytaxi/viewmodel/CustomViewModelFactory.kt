@@ -4,9 +4,6 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.serionz.mytaxi.api.Repository
 
-/**
- * Created by johns on 26/01/2019.
- */
 
 class CustomViewModelFactory(private val repo: Repository) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

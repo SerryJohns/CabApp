@@ -5,9 +5,6 @@ import com.serionz.mytaxi.api.responses.CabsResponse
 import com.serionz.mytaxi.api.responses.GeocodeAddressResponse
 import com.serionz.mytaxi.data.Bounds
 
-/**
- * Created by johns on 25/01/2019.
- */
 
 class Repository {
     private val apiService = ApiClient().getApiClient()?.create(ApiService::class.java)

@@ -9,9 +9,6 @@ import com.serionz.mytaxi.data.Cab
 import com.serionz.mytaxi.data.Coordinate
 import com.serionz.mytaxi.data.GeocodeAddress
 
-/**
- * Created by johns on 25/01/2019.
- */
 
 class CabsListFragmentViewModel(private val repo: Repository) : ViewModel() {
     var cabsList = MutableLiveData<List<Cab>>()

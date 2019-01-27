@@ -123,7 +123,7 @@ class CabMapFragment : Fragment(), OnMapReadyCallback {
 
     private fun getBitmapIcon(drawableResource: Int): Bitmap {
         val bitmapDrawable = ContextCompat.getDrawable(context!!, drawableResource) as BitmapDrawable
-        return Bitmap.createScaledBitmap(bitmapDrawable.bitmap, 100, 100, false)
+        return Bitmap.createScaledBitmap(bitmapDrawable.bitmap, 50, 50, false)
     }
 
     override fun onResume() {
