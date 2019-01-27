@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MyTaxi</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="taxi">Taxi</string>
+    <string name="car_pool">Pooling</string>
+    <string name="cabs_list">Cabs List</string>
+    <string name="map">Map</string>
+</resources>
