@@ -121,13 +121,13 @@ class CabsListFragment : Fragment() {
 
         override fun onPostExecute(result: Unit?) {
             super.onPostExecute(result)
+            mViewModel.cabsList.value = cabsList
             mCabsListAdapter.notifyDataSetChanged()
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id = item?.itemId
-
         if (id == R.id.action_refresh) {
             refreshData()
         }
