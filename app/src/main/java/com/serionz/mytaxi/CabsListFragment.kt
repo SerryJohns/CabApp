@@ -1,6 +1,5 @@
 package com.serionz.mytaxi
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.location.Geocoder
 import android.os.AsyncTask
@@ -74,15 +73,6 @@ class CabsListFragment : Fragment() {
                 }
             }
         }
-
-        // Observe for updates on the cabsList object
-        mViewModel.cabsList.observe(this, Observer {
-            if (it != null) {
-                cabsList.clear()
-                cabsList.addAll(it)
-                mCabsListAdapter.notifyDataSetChanged()
-            }
-        })
     }
 
     private fun refreshData() {
@@ -108,6 +98,7 @@ class CabsListFragment : Fragment() {
             // Populate addresses for the cab objects
             if (result != null) {
                 mViewModel.cabsList.value = result
+                cabsList.clear()
                 cabsList.addAll(result)
                 mCabsListAdapter.notifyDataSetChanged()
                 mSwipeRefreshLayout.isRefreshing = false
