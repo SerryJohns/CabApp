@@ -1,19 +1,15 @@
 package com.serionz.mytaxi.api
 
-import com.google.android.gms.maps.model.LatLng
 import com.serionz.mytaxi.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.reflect.Type
 import java.util.concurrent.TimeUnit
 
 
 class ApiClient {
     private var retrofitApi: Retrofit? = null
-    private var retrofitGeocode: Retrofit? = null
 
     private val client = OkHttpClient().newBuilder()
         .connectTimeout(100, TimeUnit.SECONDS)
@@ -40,26 +36,5 @@ class ApiClient {
                 .build()
         }
         return retrofitApi
-    }
-
-    fun getGeocodeClient(): Retrofit? {
-        val baseURL = "https://maps.googleapis.com/maps/api/"
-        if (retrofitGeocode == null) {
-            retrofitGeocode = createRetrofitClient(baseURL, client)
-                .addConverterFactory(object : Converter.Factory() {
-                    override fun stringConverter(
-                        type: Type,
-                        annotations: Array<Annotation>,
-                        retrofit: Retrofit
-                    ): Converter<*, String>? {
-                        if (type != LatLng::class.java) {
-                            return super.stringConverter(type, annotations, retrofit)
-                        }
-                        return Converter { latLng: LatLng -> "${latLng.latitude},${latLng.longitude}" }
-                    }
-                })
-                .build()
-        }
-        return retrofitGeocode
     }
 }

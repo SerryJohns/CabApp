@@ -2,6 +2,7 @@ package com.serionz.mytaxi
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.location.Geocoder
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -105,25 +106,31 @@ class CabsListFragment : Fragment() {
         override fun onPostExecute(result: List<Cab>?) {
             super.onPostExecute(result)
             // Populate addresses for the cab objects
-            if (result != null)
-                LoadAddress(result).execute()
+            if (result != null) {
+                mViewModel.cabsList.value = result
+                cabsList.addAll(result)
+                mCabsListAdapter.notifyDataSetChanged()
+                mSwipeRefreshLayout.isRefreshing = false
+
+                for (cab: Cab in cabsList) {
+                    LoadAddress().execute(cab)
+                }
+            }
         }
     }
 
-    inner class LoadAddress(private val cabs: List<Cab>) : AsyncTask<Unit, Unit, List<Cab>?>() {
-        override fun doInBackground(vararg params: Unit?): List<Cab>? {
-            for (cab: Cab in cabs) {
-                val address = mViewModel.getGeocodeAddress(cab.coordinate)
-                cab.address = address?.formattedAddress
-            }
-            return cabs
+    inner class LoadAddress : AsyncTask<Cab, Unit, Unit>() {
+        override fun doInBackground(vararg cabs: Cab) {
+            val geocoder = Geocoder(context, resources.configuration.locale)
+            val cab = cabs[0]
+            val results = geocoder.getFromLocation(cab.coordinate.latitude, cab.coordinate.longitude, 1)
+            val address = results[0].getAddressLine(0)
+            cab.address = address
         }
 
-        override fun onPostExecute(result: List<Cab>?) {
+        override fun onPostExecute(result: Unit?) {
             super.onPostExecute(result)
-            // Update the cabsList live data object. This fires th observer, which in turn updates the recycler view
-            mViewModel.cabsList.value = result
-            mSwipeRefreshLayout.isRefreshing = false
+            mCabsListAdapter.notifyDataSetChanged()
         }
     }
 

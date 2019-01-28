@@ -109,6 +109,7 @@ class CabMapFragment : Fragment(), OnMapReadyCallback {
                         .position(latLng)
                         .title(cab.address)
                         .snippet(cab.fleetType.toString())
+                        .flat(true)
                         .icon(
                             when (cab.fleetType) {
                                 FleetType.TAXI -> BitmapDescriptorFactory.fromBitmap(taxiIcon)
